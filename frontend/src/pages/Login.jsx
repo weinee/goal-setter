@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { FaUser, FaSignInAlt } from "react-icons/fa";
 
 import { login, reset } from "../features/auth/authSlice";
 import Spinner from "../components/Spinner";
@@ -58,10 +57,7 @@ const Login = () => {
   return (
     <>
       <section className={"heading"}>
-        <h1>
-          <FaSignInAlt />
-          Login
-        </h1>
+        <h1>Login</h1>
         <p>Please sign in</p>
       </section>
       <section className={"form"}>

@@ -82,7 +82,7 @@ export const goalSlice = createSlice({
     builder.addCase(createGoal.fulfilled, (state, action) => {
       state.isLoading = false;
       state.isSuccess = true;
-      state.goals = action.payload;
+      state.goals = [...state.goals, action.payload];
     });
     builder.addCase(createGoal.rejected, (state, action) => {
       state.isLoading = false;

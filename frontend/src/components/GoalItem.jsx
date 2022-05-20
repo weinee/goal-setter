@@ -1,20 +1,30 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { deleteGoal } from "../features/goals/goalSlice";
+import { FaTimes, FaRegCircle, FaRegCheckCircle } from "react-icons/fa";
+import { deleteGoal, updateGoal } from "../features/goals/goalSlice";
 
-const GoalItem = ({ goal }) => {
+const GoalItem = ({ goal, handleCheck }) => {
   const dispatch = useDispatch();
 
   return (
     <div className={"goal"}>
-      <div>{new Date(goal.createdAt).toLocaleString("en-MY")}</div>
-      <h2>{goal.text}</h2>
-      <button
-        className={"close"}
+      {goal && goal.status === "pending" ? (
+        <FaRegCircle className={"check"} size={18} onClick={handleCheck} />
+      ) : (
+        <FaRegCheckCircle className={"check"} size={18} onClick={handleCheck} />
+      )}
+      {goal && goal.status === "pending" ? (
+        <h2 className={"wordwrap"}>{goal.text}</h2>
+      ) : (
+        <h2 className={"wordwrap"}>
+          <s>{goal.text}</s>
+        </h2>
+      )}
+      <FaTimes
+        className={"delete-goal"}
+        size={18}
         onClick={() => dispatch(deleteGoal(goal._id))}
-      >
-        X
-      </button>
+      />
     </div>
   );
 };

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import GoalForm from "../components/GoalForm";
 import Spinner from "../components/Spinner";
-import { getGoals, reset } from "../features/goals/goalSlice";
+import { getGoals, reset, updateGoal } from "../features/goals/goalSlice";
 import GoalItem from "../components/GoalItem";
 
 const Dashboard = () => {
@@ -25,11 +25,19 @@ const Dashboard = () => {
     dispatch(getGoals());
 
     if (user) {
-      return () => {
-        dispatch(reset());
-      };
+      dispatch(reset());
     }
   }, [user, navigate, isError, message, dispatch]);
+
+  const handleCheck = (goal) => {
+    const oldStatus = goal.status;
+    dispatch(
+      updateGoal({
+        ...goal,
+        status: oldStatus === "pending" ? "completed" : "pending",
+      })
+    );
+  };
 
   if (isLoading) {
     return <Spinner />;
@@ -43,10 +51,14 @@ const Dashboard = () => {
       </section>
       <GoalForm />
       <section className={"content"}>
-        {goals.length > 0 ? (
+        {goals && goals.length > 0 ? (
           <div className={"goals"}>
             {goals.map((goal) => (
-              <GoalItem key={goal._id} goal={goal} />
+              <GoalItem
+                key={goal._id}
+                goal={goal}
+                handleCheck={() => handleCheck(goal)}
+              />
             ))}
           </div>
         ) : (

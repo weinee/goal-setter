@@ -1,6 +1,6 @@
 #Goals App - MERN Stack
 
-Tutorial from [Learn The MERN Stack](https://youtu.be/-0exw-9YJBo)
+Tutorial from [Learn The MERN Stack](https://youtu.be/-0exw-9YJBo). Code has been slightly altered to include things that are not in the tutorial.
 
 #Todo
 
